@@ -1,0 +1,60 @@
+﻿@model BasketballStatsApp.Models.Player
+
+@{
+    ViewData["Title"] = "Create Player";
+}
+
+<h2>Create Player</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Position"></label>
+        <input asp-for="Position" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Player Image</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TeamId"></label>
+        <select asp-for="TeamId" asp-items="ViewBag.TeamId" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PointsPerGame"></label>
+        <input asp-for="PointsPerGame" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AssistsPerGame"></label>
+        <input asp-for="AssistsPerGame" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReboundsPerGame"></label>
+        <input asp-for="ReboundsPerGame" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

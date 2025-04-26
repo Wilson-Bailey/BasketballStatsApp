@@ -1,0 +1,43 @@
+﻿@model BasketballStatsApp.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2 class="text-center">🏀 Player Stats Dashboard</h2>
+
+<div class="row text-center mt-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h4>Total Players</h4>
+            <p class="display-6">@Model.TotalPlayers</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h4>Total Teams</h4>
+            <p class="display-6">@Model.TotalTeams</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h4>Avg Points Per Game</h4>
+            <p class="display-6">@Model.AveragePPG</p>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+            <h4>Avg Assists Per Game</h4>
+            <p class="display-6">@Model.AverageAPG</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+            <h4>Avg Rebounds Per Game</h4>
+            <p class="display-6">@Model.AverageRPG</p>
+        </div>
+    </div>
+</div>

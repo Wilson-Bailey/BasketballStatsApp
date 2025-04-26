@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BasketballStatsApp.Models.Player>
+<form method="post" id="antiForgeryForm">
+    @Html.AntiForgeryToken()
+</form>
+<link rel="stylesheet" href="~/css/index.css" />
+
+<h2 class="text-center mt-4">Players</h2>
+
+<!--  Create Player Button -->
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-success">
+            + Create Player
+        </a>
+    </div>
+}
+
+<!--  Card Layout -->
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var player in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="flip-container">
+                    <div class="flip-card">
+                        <!-- FRONT -->
+                        <div class="flip-front">
+                            <img src="~/images/@player.ImageFileName" alt="Player image" />
+                            <div class="info">
+                                <h5>@player.FullName</h5>
+                                <p>@player.Position</p>
+                                <p>@player.Team?.Name</p>
+                            </div>
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-back">
+                            <h6>Stats</h6>
+                            <p><strong>PPG:</strong> @player.PointsPerGame</p>
+                            <p><strong>APG:</strong> @player.AssistsPerGame</p>
+                            <p><strong>RPG:</strong> @player.ReboundsPerGame</p>
+
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <!-- Edit Button -->
+                                    <a asp-action="Edit" asp-route-id="@player.PlayerId" class="btn btn-warning btn-sm">
+                                        Edit
+                                    </a>
+
+                                    <!-- AJAX Delete Button -->
+                                    <button type="button" class="btn btn-danger btn-sm ajax-delete" data-id="@player.PlayerId">
+                                        Delete
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/player-index.js"></script>
+}
