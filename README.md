@@ -59,7 +59,7 @@ DELETE a player
 
 API protected with proper CORS configuration.
 
-✅ JavaScript and AJAX
+ JavaScript and AJAX
 AJAX delete allows removing players without page reload.
 
 Interactive flip cards built with JavaScript (click to reveal stats).
