@@ -6,53 +6,51 @@
 
 <h2>Edit @Model.FullName</h2>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="PlayerId" />
 
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
 
-
+    <!-- Hidden ID -->
+    <input asp-for="PlayerId" type="hidden" />
 
     <div class="form-group">
         <label asp-for="FullName"></label>
         <input asp-for="FullName" class="form-control" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Position"></label>
         <input asp-for="Position" class="form-control" />
-        <span asp-validation-for="Position" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Age"></label>
         <input asp-for="Age" class="form-control" />
-        <span asp-validation-for="Age" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TeamId"></label>
-        <select asp-for="TeamId" class="form-control" asp-items="ViewBag.TeamId"></select>
-        <span asp-validation-for="TeamId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="PointsPerGame"></label>
         <input asp-for="PointsPerGame" class="form-control" />
-        <span asp-validation-for="PointsPerGame" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="AssistsPerGame"></label>
         <input asp-for="AssistsPerGame" class="form-control" />
-        <span asp-validation-for="AssistsPerGame" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="ReboundsPerGame"></label>
         <input asp-for="ReboundsPerGame" class="form-control" />
-        <span asp-validation-for="ReboundsPerGame" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TeamId"></label>
+        <select asp-for="TeamId" asp-items="ViewBag.TeamId" class="form-control"></select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Change Image (optional)</label>
+        <input type="file" name="ImageFile" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-primary">Update</button>

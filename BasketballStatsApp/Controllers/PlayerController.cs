@@ -19,7 +19,12 @@ public class PlayerController : Controller
     // GET: Player
     public async Task<IActionResult> Index()
     {
-        var players = await _context.Players.Include(p => p.Team).ToListAsync();
+
+        var players = await _context.Players
+            .AsNoTracking()  
+            .Include(p => p.Team)
+            .ToListAsync();
+
         return View(players);
     }
 
@@ -99,87 +104,82 @@ public class PlayerController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
+
+        
+
     }
 
+
     // GET: Player/Edit/5
-    [Authorize] 
+    [Authorize]
     public async Task<IActionResult> Edit(int? id)
     {
-        if (id == null) return NotFound();
+        if (id == null)
+            return NotFound();
 
-        var player = await _context.Players.FindAsync(id);
-        if (player == null) return NotFound();
+        var player = await _context.Players
+            .AsNoTracking() // make sure fresh read
+            .FirstOrDefaultAsync(p => p.PlayerId == id);
+
+        if (player == null)
+            return NotFound();
 
         ViewBag.TeamId = new SelectList(_context.Teams, "TeamId", "Name", player.TeamId);
         return View(player);
     }
 
+    // POST: Player/Edit/5
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("PlayerId,FullName,Age,Position,PointsPerGame,AssistsPerGame,ReboundsPerGame,TeamId")] Player updatedPlayer, IFormFile ImageFile)
+    public async Task<IActionResult> Edit(int id, [Bind("PlayerId,FullName,Age,Position,PointsPerGame,AssistsPerGame,ReboundsPerGame,TeamId")] Player formPlayer, IFormFile ImageFile)
     {
-        if (id != updatedPlayer.PlayerId)
+        if (id != formPlayer.PlayerId)
         {
             return NotFound();
         }
 
-        var playerInDb = await _context.Players.FindAsync(id);
+        var playerInDb = await _context.Players.FirstOrDefaultAsync(p => p.PlayerId == id);
         if (playerInDb == null)
         {
             return NotFound();
         }
 
-        if (ModelState.IsValid)
+        //  Correctly copy new values over
+        playerInDb.FullName = formPlayer.FullName;
+        playerInDb.Position = formPlayer.Position;
+        playerInDb.Age = formPlayer.Age;
+        playerInDb.PointsPerGame = formPlayer.PointsPerGame;
+        playerInDb.AssistsPerGame = formPlayer.AssistsPerGame;
+        playerInDb.ReboundsPerGame = formPlayer.ReboundsPerGame;
+        playerInDb.TeamId = formPlayer.TeamId;
+
+        //  Handle image upload 
+        if (ImageFile != null && ImageFile.Length > 0)
         {
-            try
+            var uploadPath = Path.Combine(_environment.WebRootPath, "images");
+            Directory.CreateDirectory(uploadPath);
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+            var filePath = Path.Combine(uploadPath, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                // Update only the fields manually
-                playerInDb.FullName = updatedPlayer.FullName;
-                playerInDb.Age = updatedPlayer.Age;
-                playerInDb.Position = updatedPlayer.Position;
-                playerInDb.PointsPerGame = updatedPlayer.PointsPerGame;
-                playerInDb.AssistsPerGame = updatedPlayer.AssistsPerGame;
-                playerInDb.ReboundsPerGame = updatedPlayer.ReboundsPerGame;
-                playerInDb.TeamId = updatedPlayer.TeamId;
-
-                //  Handle new image upload if provided
-                if (ImageFile != null && ImageFile.Length > 0)
-                {
-                    string uploadPath = Path.Combine(_environment.WebRootPath, "images");
-                    Directory.CreateDirectory(uploadPath);
-
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
-                    string filePath = Path.Combine(uploadPath, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await ImageFile.CopyToAsync(stream);
-                    }
-
-                    playerInDb.ImageFileName = fileName; // Update with new file
-                }
-
-                await _context.SaveChangesAsync();
-
-                //  Redirect to Player Index after successful update
-                return RedirectToAction("Index", "Player");
+                await ImageFile.CopyToAsync(stream);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Players.Any(e => e.PlayerId == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            playerInDb.ImageFileName = fileName;
         }
 
-        ViewBag.TeamId = new SelectList(_context.Teams, "TeamId", "Name", updatedPlayer.TeamId);
-        return View(updatedPlayer);
+        await _context.SaveChangesAsync(); //  Save it for real
+
+        return RedirectToAction("Index", "Player"); //  Back to list
     }
+
+
+
+
+
 
     // GET: Player/Delete/5
     [Authorize] 

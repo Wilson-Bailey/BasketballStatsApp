@@ -26,11 +26,11 @@
                     <div class="flip-card">
                         <!-- FRONT -->
                         <div class="flip-front">
-                            <img src="~/images/@player.ImageFileName" alt="Player image" />
+                            <img src="~/images/@player.ImageFileName" alt="Player image" class="card-img-top" />
                             <div class="info">
                                 <h5>@player.FullName</h5>
                                 <p>@player.Position</p>
-                                <p>@player.Team?.Name</p>
+                                <p>@player.Team?.Name</p> <!-- show Team Name -->
                             </div>
                         </div>
 
@@ -41,20 +41,12 @@
                             <p><strong>APG:</strong> @player.AssistsPerGame</p>
                             <p><strong>RPG:</strong> @player.ReboundsPerGame</p>
 
-                            <div class="d-flex justify-content-center gap-2 mt-2">
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <!-- Edit Button -->
-                                    <a asp-action="Edit" asp-route-id="@player.PlayerId" class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
 
-                                    <!-- AJAX Delete Button -->
-                                    <button type="button" class="btn btn-danger btn-sm ajax-delete" data-id="@player.PlayerId">
-                                        Delete
-                                    </button>
-                                }
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="Edit" asp-route-id="@player.PlayerId" class="btn btn-warning btn-sm mt-2">Edit</a>
+                                <button type="button" class="btn btn-danger btn-sm mt-2 ajax-delete" data-id="@player.PlayerId">Delete</button>
+                            }
                         </div>
                     </div>
                 </div>
