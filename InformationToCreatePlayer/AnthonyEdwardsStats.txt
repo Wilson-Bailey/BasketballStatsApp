@@ -1,0 +1,5 @@
+PPG: 27.6
+ReboundsPerGame: 5.7
+Ast: 4.5
+Team: Minnesota Timberwolves
+Position: Sg

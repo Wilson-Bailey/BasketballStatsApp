@@ -1,0 +1,5 @@
+PPG: 26.6
+ReboundsPerGame: 6
+AstPerGame: 4.2
+Position: Sf
+Team: Phoenix Suns
