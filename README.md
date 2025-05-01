@@ -15,7 +15,7 @@ Microsoft Identity	        Authentication and Authorization
 Bootstrap 5	Responsive     UI framework
 JavaScript / AJAX	        Asynchronous operations and interactivity
 SQL Server LocalDB	      Database storage
-LocalStorage (Browser)	  Save dark mode setting
+
 
 3. Database Model
 The app includes three interconnected entities:
