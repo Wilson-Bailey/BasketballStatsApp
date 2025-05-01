@@ -77,4 +77,17 @@ Unauthorized users are redirected to the login page if trying to access protecte
 Navigation menu and buttons adjust dynamically based on login status (e.g., Create Player button hidden if logged out).
 
 
+Accessibility Principles
+Semantic HTML Structure
+Headings (<h2>), lists, form labels, and buttons use proper HTML semantics to improve screen reader navigation and understanding.
+
+Focus Indicators
+Bootstrap’s default focus outlines ensure users navigating with a keyboard can visually identify where they are on the page.
+
+Responsive Layout
+The site uses Bootstrap’s grid system to adapt to various screen sizes, ensuring readability and usability across mobile and desktop devices.
+
+Form Validation Feedback
+Forms display validation errors using text indicators and styling that clearly identify issues, which helps users with visual or cognitive impairments.
+
 
