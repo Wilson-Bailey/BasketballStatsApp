@@ -79,16 +79,20 @@ Navigation menu and buttons adjust dynamically based on login status (e.g., Crea
 
 Accessibility Principles
 Semantic HTML Structure
-Headings (<h2>), lists, form labels, and buttons use proper HTML semantics to improve screen reader navigation and understanding.
+Headings h2 lists form labels and buttons use proper HTML semantics to improve screen reader navigation and understanding
 
 Focus Indicators
-Bootstrap’s default focus outlines ensure users navigating with a keyboard can visually identify where they are on the page.
+Bootstraps default focus outlines ensure users navigating with a keyboard can visually identify where they are on the page
+
+Color Contrast
+Bootstraps color system is used to maintain a readable contrast ratio
 
 Responsive Layout
-The site uses Bootstrap’s grid system to adapt to various screen sizes, ensuring readability and usability across mobile and desktop devices.
+The site uses Boostraps grid system to adapt to various screen sizes, ensuring readability and usability
 
 Form Validation Feedback
-Forms display validation errors using text indicators and styling that clearly identify issues, which helps users with visual or cognitive impairments.
+Form display validation errors using text indicators and styling that clearly identify issues which helps user with visual or cognitive impairments.
+
 
 AI Disclosure
 Chatgpt did help walk me through how to seed data which is all the NBA teams so the user doesnt have to manually type in the team everytime they want to add a new player. I tried getting it by myself but I found it very complicated yet essential to my project so I needed a little extra help.
