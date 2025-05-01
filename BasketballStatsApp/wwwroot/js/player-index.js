@@ -6,6 +6,24 @@
         });
     });
 
+    const searchInput = document.getElementById('playerSearch');
+    const playerCards = document.querySelectorAll('.player-card');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const query = this.value.trim().toLowerCase();
+
+            playerCards.forEach(card => {
+                const searchableText = card.getAttribute('data-name').toLowerCase();
+                if (searchableText.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
     // AJAX Delete Player
     document.querySelectorAll(".ajax-delete").forEach(button => {
         button.addEventListener("click", async function (event) {

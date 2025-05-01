@@ -27,7 +27,7 @@
     <div class="row justify-content-center">
         @foreach (var player in Model)
         {
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 mb-4 player-card" data-name="@($"{player.FullName} {player.Position} {player.Team?.Name}")">
                 <div class="flip-container">
                     <div class="flip-card">
                         <!-- FRONT -->
@@ -36,7 +36,7 @@
                             <div class="info">
                                 <h5>@player.FullName</h5>
                                 <p>@player.Position</p>
-                                <p>@player.Team?.Name</p> <!-- show Team Name -->
+                                <p>@player.Team?.Name</p>
                             </div>
                         </div>
 
@@ -46,7 +46,6 @@
                             <p><strong>PPG:</strong> @player.PointsPerGame</p>
                             <p><strong>APG:</strong> @player.AssistsPerGame</p>
                             <p><strong>RPG:</strong> @player.ReboundsPerGame</p>
-
 
                             @if (User.Identity.IsAuthenticated)
                             {
