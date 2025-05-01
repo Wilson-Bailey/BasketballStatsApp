@@ -76,6 +76,8 @@ Login Required to Create, Edit, Delete players.
 Unauthorized users are redirected to the login page if trying to access protected actions.
 Navigation menu and buttons adjust dynamically based on login status (e.g., Create Player button hidden if logged out).
 
+Having the user being able to select their favorite cards was on my user stories but found it was unneccessary to have in the application once I started because I went down the approach of the user creating their own players 
+
 
 Accessibility Principles
 Semantic HTML Structure
