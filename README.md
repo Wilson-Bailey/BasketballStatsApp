@@ -90,4 +90,7 @@ The site uses Bootstrap’s grid system to adapt to various screen sizes, ensuri
 Form Validation Feedback
 Forms display validation errors using text indicators and styling that clearly identify issues, which helps users with visual or cognitive impairments.
 
+AI Disclosure
+Chatgpt did help walk me through how to seed data which is all the NBA teams so the user doesnt have to manually type in the team everytime they want to add a new player. I tried getting it by myself but I found it very complicated yet essential to my project so I needed a little extra help.
+
 
