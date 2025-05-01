@@ -28,7 +28,7 @@ UserFavorite	Many-to-Many relation between IdentityUser and Player (for favoriti
 Relationships:
 
 Team ⬌ Player (One-to-Many)
-IdentityUser ⬌ Player (Many-to-Many via UserFavorite)
+IdentityUser ⬌ Player 
 
 4. Main Features
  CRUD Operations (Create, Read-All, Read, Update, Delete)
