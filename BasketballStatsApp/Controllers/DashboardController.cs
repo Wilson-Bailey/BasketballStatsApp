@@ -17,9 +17,16 @@ public class DashboardController : Controller
         var totalPlayers = await _context.Players.CountAsync();
         var totalTeams = await _context.Teams.CountAsync();
 
-        var avgPPG = await _context.Players.AverageAsync(p => p.PointsPerGame);
-        var avgAPG = await _context.Players.AverageAsync(p => p.AssistsPerGame);
-        var avgRPG = await _context.Players.AverageAsync(p => p.ReboundsPerGame);
+        double avgPPG = 0;
+        double avgAPG = 0;
+        double avgRPG = 0;
+
+        if (totalPlayers > 0)
+        {
+            avgPPG = await _context.Players.AverageAsync(p => p.PointsPerGame);
+            avgAPG = await _context.Players.AverageAsync(p => p.AssistsPerGame);
+            avgRPG = await _context.Players.AverageAsync(p => p.ReboundsPerGame);
+        }
 
         var viewModel = new DashboardViewModel
         {
