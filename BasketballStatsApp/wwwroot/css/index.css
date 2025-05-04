@@ -1,4 +1,5 @@
-﻿.flip-container {
+﻿
+.flip-container {
     perspective: 1000px;
     width: 250px;
     height: 400px;
