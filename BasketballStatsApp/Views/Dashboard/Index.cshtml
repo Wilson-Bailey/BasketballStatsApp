@@ -9,7 +9,9 @@
 @if (Model.TotalPlayers == 0)
 {
     <div class="alert alert-warning text-center mt-4">
-        No player data available yet. Go to the players page and create a player to see stats!
+        No player data available yet.
+        <a asp-action="Index" asp-controller="Player" class="alert-link">Go to the Players page</a>
+        and create a player to see stats!
     </div>
 }
 else
